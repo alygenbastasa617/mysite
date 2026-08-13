@@ -1,1 +1,27 @@
+backend:
+  name: github
+  repo: alygenbastasa617/mysite
+  branch: main
 
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "content"
+    label: "Website Content"
+    files:
+      - name: "homepage"
+        label: "Homepage"
+        file: "content/homepage.md"
+        fields:
+          - label: "Title"
+            name: "title"
+            widget: "string"
+
+          - label: "Announcement"
+            name: "announcement"
+            widget: "text"
+
+          - label: "Picture"
+            name: "picture"
+            widget: "image"
