@@ -34,6 +34,137 @@
             font-family: 'Inter', sans-serif;
         }
 
+        /* LOGIN SCREEN */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, #001d4d 0%, #00338d 50%, #00255f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #login-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 36px;
+            width: 420px;
+            max-width: 92vw;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            text-align: center;
+            border-top: 5px solid #f9a825;
+        }
+
+        .login-card .login-logo {
+            height: 70px;
+            margin-bottom: 8px;
+        }
+
+        .login-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .login-card .login-subtitle {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .login-field {
+            position: relative;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .login-field label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .login-field i.field-icon {
+            position: absolute;
+            left: 12px;
+            top: 38px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 10px 12px 10px 36px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .login-field input:focus {
+            border-color: var(--primary);
+        }
+
+        .login-field .toggle-pass {
+            position: absolute;
+            right: 10px;
+            top: 38px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .login-error {
+            color: var(--danger);
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .login-btn:hover { background: var(--primary-dark); }
+
+        .login-footer {
+            margin-top: 20px;
+            font-size: 0.68rem;
+            color: #94a3b8;
+        }
+
+        /* MAIN APP (hidden until login) */
+        #app-content { display: none; }
+        #app-content.visible { display: block; }
+
         body {
             background-color: var(--bg);
             color: var(--text-dark);
@@ -98,7 +229,39 @@
         .header-actions {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 14px;
+            border-radius: 10px;
+            color: white;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .user-badge i { font-size: 1.1rem; }
+
+        .btn-logout {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.82rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .btn-logout:hover { background: rgba(239,68,68,0.8); border-color: rgba(239,68,68,0.9); }
 
         /* Container & Navigation */
         .container {
@@ -552,136 +715,42 @@
             }
         }
 
-        /* PRINT STYLING - PROFESSIONAL OFFICIAL FORM */
-        #print-section {
-            display: none;
-        }
+        /* PRINT STYLING */
+        #print-section { display: none; }
 
         @media print {
-            body * {
-                visibility: hidden;
-            }
-            #print-section, #print-section * {
-                visibility: visible;
-            }
+            body * { visibility: hidden; }
+            #print-section, #print-section * { visibility: visible; }
             #print-section {
                 display: block !important;
                 position: absolute;
-                left: 0;
-                top: 0;
+                left: 0; top: 0;
                 width: 100%;
                 padding: 20px 30px;
                 background: white;
                 color: #000;
                 font-family: 'Times New Roman', Times, serif;
             }
-
-            .print-header {
-                text-align: center;
-                border-bottom: 2px solid #000;
-                padding-bottom: 12px;
-                margin-bottom: 20px;
-            }
-
-            .print-header h4 {
-                font-size: 11pt;
-                font-weight: normal;
-                text-transform: uppercase;
-                margin-bottom: 2px;
-            }
-
-            .print-header h3 {
-                font-size: 13pt;
-                font-weight: bold;
-                text-transform: uppercase;
-                margin-bottom: 2px;
-            }
-
-            .print-header h2 {
-                font-size: 15pt;
-                font-weight: bold;
-                text-transform: uppercase;
-                margin-top: 6px;
-                text-decoration: underline;
-            }
-
-            .print-emp-grid {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 20px;
-                border: 1px solid #000;
-            }
-
-            .print-emp-grid td {
-                padding: 6px 10px;
-                border: 1px solid #000;
-                font-size: 10pt;
-            }
-
-            .print-emp-grid td.label {
-                font-weight: bold;
-                background-color: #f2f2f2 !important;
-                -webkit-print-color-adjust: exact;
-                width: 20%;
-            }
-
-            .print-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 30px;
-            }
-
-            .print-table th, .print-table td {
-                border: 1px solid #000;
-                padding: 6px 8px;
-                font-size: 9pt;
-                text-align: left;
-            }
-
-            .print-table th {
-                background-color: #f2f2f2 !important;
-                -webkit-print-color-adjust: exact;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            .print-signatures {
-                margin-top: 40px;
-                display: flex;
-                justify-content: space-between;
-                page-break-inside: avoid;
-            }
-
-            .print-sig-box {
-                width: 30%;
-                text-align: center;
-                font-size: 10pt;
-            }
-
-            .print-sig-line {
-                margin-top: 45px;
-                border-top: 1px solid #000;
-                font-weight: bold;
-                padding-top: 4px;
-            }
-
-            .print-footer-note {
-                margin-top: 30px;
-                font-size: 8.5pt;
-                font-style: italic;
-                color: #444;
-                text-align: center;
-                border-top: 1px dashed #aaa;
-                padding-top: 8px;
-            }
+            .print-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px; }
+            .print-header h4 { font-size: 11pt; font-weight: normal; text-transform: uppercase; margin-bottom: 2px; }
+            .print-header h3 { font-size: 13pt; font-weight: bold; text-transform: uppercase; margin-bottom: 2px; }
+            .print-header h2 { font-size: 15pt; font-weight: bold; text-transform: uppercase; margin-top: 6px; text-decoration: underline; }
+            .print-emp-grid { width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #000; }
+            .print-emp-grid td { padding: 6px 10px; border: 1px solid #000; font-size: 10pt; }
+            .print-emp-grid td.label { font-weight: bold; background-color: #f2f2f2 !important; -webkit-print-color-adjust: exact; width: 20%; }
+            .print-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+            .print-table th, .print-table td { border: 1px solid #000; padding: 6px 8px; font-size: 9pt; text-align: left; }
+            .print-table th { background-color: #f2f2f2 !important; -webkit-print-color-adjust: exact; font-weight: bold; text-transform: uppercase; }
+            .print-signatures { margin-top: 40px; display: flex; justify-content: space-between; page-break-inside: avoid; }
+            .print-sig-box { width: 30%; text-align: center; font-size: 10pt; }
+            .print-sig-line { margin-top: 45px; border-top: 1px solid #000; font-weight: bold; padding-top: 4px; }
+            .print-footer-note { margin-top: 30px; font-size: 8.5pt; font-style: italic; color: #444; text-align: center; border-top: 1px dashed #aaa; padding-top: 8px; }
         }
 
         /* OFFICIAL DEPED FOOTER */
         .official-footer {
             position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            left: 0; right: 0; bottom: 0;
             z-index: 100;
             background: linear-gradient(135deg, #001d4d 0%, #00338d 100%);
             color: #cbd5e1;
@@ -741,15 +810,48 @@
             color: #94a3b8;
         }
 
-        .footer-bottom p {
-            display: inline;
-            margin: 0 8px;
-        }
+        .footer-bottom p { display: inline; margin: 0 8px; }
         .footer-bottom .fa { margin-right: 4px; }
     </style>
 </head>
 <body>
 
+    <!-- ===== LOGIN SCREEN ===== -->
+    <div id="login-screen">
+        <div class="login-card">
+            <img src="deped-logo.svg" alt="DepEd Logo" class="login-logo">
+            <h2><i class="fa-solid fa-file-invoice-dollar" style="color:var(--primary);"></i> Payroll & Claim Tracking</h2>
+            <p class="login-subtitle">Department of Education | Division of Zamboanga del Norte</p>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="login-field">
+                    <label for="loginUser"><i class="fa-solid fa-user"></i> Username</label>
+                    <i class="fa-solid fa-user field-icon"></i>
+                    <input type="text" id="loginUser" placeholder="Enter admin username" required autocomplete="off">
+                </div>
+                <div class="login-field">
+                    <label for="loginPass"><i class="fa-solid fa-lock"></i> Password</label>
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="loginPass" placeholder="Enter password" required>
+                    <button type="button" class="toggle-pass" onclick="togglePassVisibility()"><i class="fa-solid fa-eye" id="togglePassIcon"></i></button>
+                </div>
+                <div class="login-error" id="loginError">
+                    <i class="fa-solid fa-circle-exclamation"></i> Invalid username or password. Please try again.
+                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                </button>
+            </form>
+
+            <p class="login-footer">
+                &copy; 2026 DepEd Division of Zamboanga del Norte<br>
+                Authorized personnel access only.
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== MAIN APPLICATION ===== -->
+    <div id="app-content">
     <header>
         <div class="title-area">
             <img src="deped-logo.svg" alt="Department of Education Logo" class="deped-logo">
@@ -760,6 +862,11 @@
             </div>
         </div>
         <div class="header-actions">
+            <div class="user-badge">
+                <i class="fa-solid fa-user-shield"></i>
+                <span id="loggedInUser">Admin</span>
+            </div>
+            <button class="btn-logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
             <button class="btn btn-success" onclick="openAddEmpModal()"><i class="fa-solid fa-user-plus"></i> Add Employee</button>
             <button class="btn btn-outline" onclick="exportCSV()"><i class="fa-solid fa-file-excel"></i> Export CSV</button>
             <button class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Print System View</button>
@@ -836,9 +943,7 @@
                                 <th style="text-align: center;">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="employee-table-body">
-                            <!-- Dynamically injected -->
-                        </tbody>
+                        <tbody id="employee-table-body"></tbody>
                     </table>
                 </div>
                 <div class="pagination-controls" id="masterlistPagination"></div>
@@ -855,7 +960,6 @@
                 <div class="filter-group">
                     <select id="allClaimsFilterMonth" class="form-select" onchange="filterAllClaims()">
                         <option value="">All Months</option>
-
                         <option value="JANUARY">January</option>
                         <option value="FEBRUARY">February</option>
                         <option value="MARCH">March</option>
@@ -914,9 +1018,7 @@
                                 <th style="text-align: center;">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="all-claims-table-body">
-                            <!-- Injected dynamically -->
-                        </tbody>
+                        <tbody id="all-claims-table-body"></tbody>
                     </table>
                 </div>
                 <div class="pagination-controls" id="allClaimsPagination"></div>
@@ -1038,7 +1140,6 @@
                 <h3><i class="fa-solid fa-file-invoice-dollar" style="color:var(--primary);"></i> Employee Claims History</h3>
                 <button class="modal-close" onclick="closeModal('viewClaimsModal')"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
             <div class="emp-banner">
                 <i class="fa-solid fa-circle-user"></i>
                 <div style="flex: 1;">
@@ -1050,7 +1151,6 @@
                     <button class="btn btn-success btn-sm" id="viewClaimAddBtn"><i class="fa-solid fa-plus"></i> Add New Claim</button>
                 </div>
             </div>
-
             <div class="table-card" style="box-shadow: none; border-radius: 8px;">
                 <div class="table-container" style="max-height: 380px;">
                     <table>
@@ -1067,9 +1167,7 @@
                                 <th style="text-align: center;">Action</th>
                             </tr>
                         </thead>
-                        <tbody id="viewClaimsTableBody">
-                            <!-- Injected -->
-                        </tbody>
+                        <tbody id="viewClaimsTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -1134,7 +1232,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: ADD / EDIT CLAIM (UPDATED WITH PARTICULAR RAW & REMARKS) -->
+    <!-- MODAL 2: ADD / EDIT CLAIM -->
     <div class="modal-backdrop" id="claimModal">
         <div class="modal">
             <div class="modal-header">
@@ -1164,13 +1262,10 @@
                             <option value="Salary Adjustment">Salary Adjustment (Deductions/Stoppage)</option>
                         </select>
                     </div>
-
-                    <!-- Particulars Raw Field -->
                     <div class="form-group full-width">
                         <label>Particulars (Raw / Detailed Description)</label>
                         <textarea id="claimParticularsRaw" class="form-control" rows="2" placeholder="e.g. Salary difference for step increment (Step 1 to Step 2) effective June 2025"></textarea>
                     </div>
-
                     <div class="form-group">
                         <label>Month Claimed *</label>
                         <select id="claimMonth" class="form-select" required>
@@ -1200,8 +1295,6 @@
                         <label>Date Released / Disbursed</label>
                         <input type="date" id="claimDateReleased" class="form-control">
                     </div>
-
-                    <!-- Remarks Field -->
                     <div class="form-group full-width">
                         <label>Remarks</label>
                         <textarea id="claimRemarks" class="form-control" rows="2" placeholder="e.g. DV # 2026-08-012, Lacking NOSI attachment, Processed via ADA"></textarea>
@@ -1215,7 +1308,7 @@
         </div>
     </div>
 
-    <!-- PRINT SECTION FOR OFFICIAL INDIVIDUAL EMPLOYEE CLAIM REPORT -->
+    <!-- PRINT SECTION -->
     <div id="print-section">
         <div class="print-header">
             <h4>Republic of the Philippines</h4>
@@ -1223,7 +1316,6 @@
             <h4>Division Payroll Office</h4>
             <h2>Personnel Claim History Record</h2>
         </div>
-
         <table class="print-emp-grid">
             <tr>
                 <td class="label">Employee Name:</td>
@@ -1244,7 +1336,6 @@
                 <td id="p-emp-integration">-</td>
             </tr>
         </table>
-
         <h4 style="margin-bottom: 10px; font-size: 11pt; text-transform: uppercase;">Claims Log History</h4>
         <table class="print-table">
             <thead>
@@ -1260,11 +1351,8 @@
                     <th style="width: 6%;">Status</th>
                 </tr>
             </thead>
-            <tbody id="print-claims-tbody">
-                <!-- Dynamically injected -->
-            </tbody>
+            <tbody id="print-claims-tbody"></tbody>
         </table>
-
         <div class="print-signatures">
             <div class="print-sig-box">
                 <div>Prepared By:</div>
@@ -1279,925 +1367,210 @@
                 <div class="print-sig-line">Schools Division Superintendent</div>
             </div>
         </div>
-
         <div class="print-footer-note">
             This document is a computer-generated official personnel claim summary from the DepEd Payroll Tracking System.
         </div>
     </div>
+    </div> <!-- end #app-content -->
+
+    <footer class="official-footer">
+        <div class="footer-main">
+            <div class="footer-col">
+                <h5>Contact Us</h5>
+                <p><i class="fa-solid fa-location-dot"></i> Capitol Drive, Estaka, Dipolog City 7100</p>
+                <p><i class="fa-solid fa-phone"></i> Tel. No.: (065) 212-5843</p>
+                <p><i class="fa-solid fa-envelope"></i> zn.division@deped.gov.ph</p>
+                <p><i class="fa-solid fa-globe"></i> www.depedzn.net</p>
+            </div>
+            <div class="footer-col">
+                <h5>DepEd Core Values</h5>
+                <p>Maka-Diyos</p>
+                <p>Maka-tao</p>
+                <p>Makakalikasan at Makabansa</p>
+            </div>
+            <div class="footer-col">
+                <h5>System</h5>
+                <p>Payroll &amp; Claim Tracking System</p>
+                <p>Personnel Salary &amp; Claims Processing</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Department of Education - Schools Division of Zamboanga del Norte. All Rights Reserved.</p>
+            <p>You may not reproduce or transmit any part of this system without prior written permission from the Schools Division Superintendent.</p>
+        </div>
+    </footer>
 
     <script>
-        // Payroll records imported from CSV (last.csv)
-        let employees = [
-            {
-                id: 1,
-                name: "BAYLON, FLORITA L.",
-                empNo: "2026-001",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "LABASON",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1001, type: "Last salary", particularsRaw: "Period covered: 1/1/26-1/4/26", month: "JANUARY", amount: 3058.92, dateReceived: "2026-04-05", dateReleased: "2026-04-22", remarks: "District: LABASON" },
-                    { id: 1040, type: "cut-off & Retired", particularsRaw: "LAST SALARY CLAIM", month: "APRIL", amount: 0, dateReceived: "2026-04-15", dateReleased: "", remarks: "District: LABASON" }
-                ]
-            },
-            {
-                id: 2,
-                name: "MANAPSAL, ELIZA O.",
-                empNo: "2026-002",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "ROXAS I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1002, type: "Last salary", particularsRaw: "Period covered: 12/1/25-12/11/25", month: "DECEMBER", amount: 22085.98, dateReceived: "2026-04-06", dateReleased: "2026-04-22", remarks: "District: ROXAS I" },
-                    { id: 1037, type: "cut-off & Retired", particularsRaw: "LAST PAY 12/1-11/2025", month: "APRIL", amount: 0, dateReceived: "2026-04-06", dateReleased: "", remarks: "District: ROXAS I" }
-                ]
-            },
-            {
-                id: 3,
-                name: "MARTINEZ, FELINA M.",
-                empNo: "2026-003",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIAYAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1003, type: "Last salary", particularsRaw: "Period covered: 10/1/25-10/3/25", month: "OCTOBER", amount: 4706.54, dateReceived: "2026-04-07", dateReleased: "2026-04-22", remarks: "District: SIAYAN" },
-                    { id: 1038, type: "cut-off & Retired", particularsRaw: "LAST SALARY CLAIM 10/1-3/2025", month: "APRIL", amount: 0, dateReceived: "2026-04-07", dateReleased: "", remarks: "District: SIAYAN" }
-                ]
-            },
-            {
-                id: 4,
-                name: "MERIN, LUNETA D.",
-                empNo: "2026-004",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "LABASON",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1004, type: "Last salary", particularsRaw: "Period covered: 3/1/26-3/10/26", month: "MARCH", amount: 16638.88, dateReceived: "2026-04-07", dateReleased: "2026-04-22", remarks: "District: LABASON" },
-                    { id: 1039, type: "cut-off & Retired", particularsRaw: "LAST SALARY CLAIM 03/01-10/2026", month: "APRIL", amount: 0, dateReceived: "2026-04-15", dateReleased: "", remarks: "District: LABASON" }
-                ]
-            },
-            {
-                id: 5,
-                name: "OIDI, JULIA R.",
-                empNo: "2026-005",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "GUTALAC II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1005, type: "Last salary", particularsRaw: "Period covered: 1/1/26-1/15/26", month: "JANUARY", amount: 39760.88, dateReceived: "2026-04-20", dateReleased: "2026-04-29", remarks: "District: GUTALAC II" }
-                ]
-            },
-            {
-                id: 6,
-                name: "CALAGUIAN, JANICE J.",
-                empNo: "2026-006",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "ROXAS I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1006, type: "Last salary", particularsRaw: "Period covered: 07/01/2026-07/15/2026", month: "JULY", amount: 32124.30, dateReceived: "2026-07-21", dateReleased: "2026-07-27", remarks: "District: ROXAS I" }
-                ]
-            },
-            {
-                id: 7,
-                name: "GOMEZ, WENDYLEN D.",
-                empNo: "2026-007",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "KATIPUNAN IV",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1007, type: "double maternity pay", particularsRaw: "Period covered: 05/27/2025-06/15/2025", month: "MAY", amount: 20042.39, dateReceived: "2026-01-13", dateReleased: "2026-01-13", remarks: "District: KATIPUNAN IV" }
-                ]
-            },
-            {
-                id: 8,
-                name: "SOLINDUM, MERRY ANN O.",
-                empNo: "2026-008",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "KATIPUNAN IV",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1008, type: "double maternity pay", particularsRaw: "Period covered: 05/17/2025-06/15/2025", month: "MAY", amount: 33865.82, dateReceived: "2026-01-13", dateReleased: "2026-01-13", remarks: "District: KATIPUNAN IV" }
-                ]
-            },
-            {
-                id: 9,
-                name: "INSAIL, BADZRIA M.",
-                empNo: "2026-009",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIBUCO",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1009, type: "double maternity pay", particularsRaw: "Period covered: 04/16/2025-06/15/2025", month: "APRIL", amount: 44067.48, dateReceived: "2026-01-14", dateReleased: "2026-01-14", remarks: "District: SIBUCO" }
-                ]
-            },
-            {
-                id: 10,
-                name: "UBAGAN, DVINE HAKESSA N.",
-                empNo: "2026-010",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "TAMPILISAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1010, type: "double maternity pay", particularsRaw: "Period covered: 04/07/2025-06/15/2025", month: "APRIL", amount: 91693.11, dateReceived: "2026-01-21", dateReleased: "2026-01-21", remarks: "District: TAMPILISAN I" }
-                ]
-            },
-            {
-                id: 11,
-                name: "FLORES, JACQUELYN P.",
-                empNo: "2026-011",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "MUTIA",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1011, type: "double maternity pay", particularsRaw: "Period covered: 05/19/2025-06/15/2025", month: "MAY", amount: 31645.11, dateReceived: "2026-01-23", dateReleased: "2026-01-23", remarks: "District: MUTIA" }
-                ]
-            },
-            {
-                id: 12,
-                name: "COTEJO, AILEEN P.",
-                empNo: "2026-012",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "KATIPUNAN IV",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1012, type: "double maternity pay", particularsRaw: "Period covered: 12/19/2022-1/3/2023", month: "DECEMBER", amount: 13280.87, dateReceived: "2026-02-06", dateReleased: "2026-05-06", remarks: "District: KATIPUNAN IV" }
-                ]
-            },
-            {
-                id: 13,
-                name: "TILACAS, DIONECIA V.",
-                empNo: "2026-013",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "MANUKAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1013, type: "double maternity pay", particularsRaw: "Period covered: 6/9-15/2025", month: "JUNE", amount: 8178.10, dateReceived: "2026-03-02", dateReleased: "2026-03-11", remarks: "District: MANUKAN I" }
-                ]
-            },
-            {
-                id: 14,
-                name: "SACAY, DEBBIE Z.",
-                empNo: "2026-014",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIBUCO",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1014, type: "double maternity pay", particularsRaw: "Period covered: 6/1/2025-6/15/2025", month: "JUNE", amount: 15012.00, dateReceived: "2026-03-16", dateReleased: "2026-06-17", remarks: "District: SIBUCO" }
-                ]
-            },
-            {
-                id: 15,
-                name: "BESE, NORHAYATE M.",
-                empNo: "2026-015",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "LABASON",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1015, type: "double maternity pay", particularsRaw: "Period covered: 04/16/2025-06/15/2025", month: "APRIL", amount: 60048.00, dateReceived: "2026-03-26", dateReleased: "2026-04-22", remarks: "District: LABASON" }
-                ]
-            },
-            {
-                id: 16,
-                name: "DAGPIN, ELENA B.",
-                empNo: "2026-016",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "BACUNGAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1016, type: "double maternity pay", particularsRaw: "Period covered: 05/26/2025-06/15/2025", month: "MAY", amount: 21020.06, dateReceived: "2026-04-15", dateReleased: "2026-04-22", remarks: "District: BACUNGAN" }
-                ]
-            },
-            {
-                id: 17,
-                name: "JAMANI, RAIYANA A.",
-                empNo: "2026-017",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIBUCO I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1017, type: "double maternity pay", particularsRaw: "Period covered: 12/6/2023-1/2/2023", month: "DECEMBER", amount: 14179.62, dateReceived: "2026-04-16", dateReleased: "2026-04-29", remarks: "District: SIBUCO I" }
-                ]
-            },
-            {
-                id: 18,
-                name: "CAINGLES, JANELYN O.",
-                empNo: "2026-018",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIAYAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1018, type: "double maternity pay", particularsRaw: "Period covered: 12/20/25-12/31/25-1/1/26-1/4/26", month: "DECEMBER", amount: 17985.26, dateReceived: "2026-04-27", dateReleased: "2026-04-29", remarks: "District: SIAYAN" }
-                ]
-            },
-            {
-                id: 19,
-                name: "BALIGASA, RACHEL M.",
-                empNo: "2026-019",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "PONOT",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1019, type: "double maternity pay", particularsRaw: "Period covered: 12/20/25-12/31/25-1/1/26-1/4/26", month: "DECEMBER", amount: 17985.55, dateReceived: "2026-04-27", dateReleased: "2026-04-29", remarks: "District: PONOT" }
-                ]
-            },
-            {
-                id: 20,
-                name: "ARGUEZA, HAHIA H.",
-                empNo: "2026-020",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIBUCO",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1020, type: "double maternity pay", particularsRaw: "Period covered: 04/19/25-04/30/25-05/01/25-05/31/25-06/01/25-06/15/25", month: "APRIL", amount: 47275.58, dateReceived: "2026-05-13", dateReleased: "", remarks: "District: SIBUCO" }
-                ]
-            },
-            {
-                id: 21,
-                name: "ANSOC, DEXIE REGENCIA",
-                empNo: "2026-021",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "GUTALAC II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1021, type: "double maternity pay", particularsRaw: "Period covered: 12/23-31/2024 - 1/1-4/2025", month: "DECEMBER", amount: 12773.90, dateReceived: "2026-05-28", dateReleased: "2026-06-01", remarks: "District: GUTALAC II" }
-                ]
-            },
-            {
-                id: 22,
-                name: "VILLEJO, CHERRY MAE",
-                empNo: "2026-022",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "PONOT",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1022, type: "double maternity pay", particularsRaw: "Period covered: 12/20-31-2025 - 1/1-4/2026", month: "DECEMBER", amount: 15713.16, dateReceived: "2026-05-28", dateReleased: "2026-06-01", remarks: "District: PONOT" }
-                ]
-            },
-            {
-                id: 23,
-                name: "RUMANDAN, ANALYN B.",
-                empNo: "2026-023",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "KATIPUNAN II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1023, type: "double maternity pay", particularsRaw: "Period covered: 12/22-31/25-1/1-5/2026", month: "DECEMBER", amount: 0, dateReceived: "2026-06-22", dateReleased: "", remarks: "District: KATIPUNAN II" },
-                    { id: 1024, type: "double maternity pay", particularsRaw: "Period covered: 12/20-31/25-1/1-4/2026", month: "DECEMBER", amount: 0, dateReceived: "2026-06-25", dateReleased: "", remarks: "District: KATIPUNAN II" }
-                ]
-            },
-            {
-                id: 24,
-                name: "DOMPALES, JENNYCA M.",
-                empNo: "2026-024",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIAYAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1025, type: "double maternity pay", particularsRaw: "Period covered: 12/20-31/25-1/1-4/2026", month: "DECEMBER", amount: 0, dateReceived: "2026-06-25", dateReleased: "", remarks: "District: SIAYAN" }
-                ]
-            },
-            {
-                id: 25,
-                name: "CASTRO, JESSEL C.",
-                empNo: "2026-025",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SINDANGAN CENTRAL",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1026, type: "double maternity pay", particularsRaw: "Period covered: 04/01/2026-05/28/2026", month: "APRIL", amount: 68754.03, dateReceived: "2026-06-29", dateReleased: "2026-07-20", remarks: "District: SINDANGAN CENTRAL" }
-                ]
-            },
-            {
-                id: 26,
-                name: "MURING, LOREN E.",
-                empNo: "2026-026",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "PONOT I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1027, type: "double maternity pay", particularsRaw: "Period covered: 12/22-31/25-1/1-5/26-4/1-4/2026", month: "DECEMBER", amount: 21785.67, dateReceived: "2026-07-08", dateReleased: "2026-07-20", remarks: "District: PONOT I" }
-                ]
-            },
-            {
-                id: 27,
-                name: "TEMORCINA, REINA T.",
-                empNo: "2026-027",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "MANUKAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1028, type: "double maternity pay", particularsRaw: "Period covered: 12/20/2025-01/04/2026", month: "DECEMBER", amount: 17985.55, dateReceived: "2026-07-21", dateReleased: "2026-07-27", remarks: "District: MANUKAN I" }
-                ]
-            },
-            {
-                id: 28,
-                name: "MACROHON, ANNALIZA P.",
-                empNo: "2026-028",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIAYAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1029, type: "double maternity pay", particularsRaw: "Period covered: 12/20/2025-01/04/2026", month: "DECEMBER", amount: 17985.55, dateReceived: "2026-07-21", dateReleased: "2026-07-27", remarks: "District: SIAYAN" }
-                ]
-            },
-            {
-                id: 29,
-                name: "TOTAO, IVY D.",
-                empNo: "2026-029",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIAYAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1030, type: "double maternity pay", particularsRaw: "Period covered: 12/20/2025-01/04/2026", month: "DECEMBER", amount: 17985.55, dateReceived: "2026-07-21", dateReleased: "2026-07-27", remarks: "District: SIAYAN" }
-                ]
-            },
-            {
-                id: 30,
-                name: "PACULBA, MICHELLE",
-                empNo: "2026-030",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "LABASON",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1031, type: "double maternity pay", particularsRaw: "Period covered: 12/20/2025-01/04/2026", month: "DECEMBER", amount: 17985.55, dateReceived: "2026-07-22", dateReleased: "2026-07-28", remarks: "District: LABASON" }
-                ]
-            },
-            {
-                id: 31,
-                name: "ARASAD, NOR-IN P.",
-                empNo: "2026-031",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIBUCO I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1032, type: "double maternity pay", particularsRaw: "Period covered: 12/18/2025-01/04/2026", month: "DECEMBER", amount: 17985.55, dateReceived: "2026-07-22", dateReleased: "2026-07-28", remarks: "District: SIBUCO I" }
-                ]
-            },
-            {
-                id: 32,
-                name: "BATTING, ROBIA P.",
-                empNo: "2026-032",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIRAWAI I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1033, type: "double maternity pay", particularsRaw: "Period covered: 12/20/2025-01/04/2026", month: "DECEMBER", amount: 15713.16, dateReceived: "2026-07-22", dateReleased: "2026-07-28", remarks: "District: SIRAWAI I" }
-                ]
-            },
-            {
-                id: 33,
-                name: "LIMOSNERO, ANGEL G.",
-                empNo: "2026-033",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "ROXAS II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1034, type: "double maternity pay", particularsRaw: "Period covered: 04/01/2026-04/27/2026", month: "APRIL", amount: 0, dateReceived: "2026-07-24", dateReleased: "", remarks: "District: ROXAS II" }
-                ]
-            },
-            {
-                id: 34,
-                name: "PAMAGAN, MARY ROSE E.",
-                empNo: "2026-034",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "ROXAS II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1035, type: "double maternity pay", particularsRaw: "Period covered: 04/01/2026-05/07/2026", month: "APRIL", amount: 0, dateReceived: "2026-07-28", dateReleased: "", remarks: "District: ROXAS II" }
-                ]
-            },
-            {
-                id: 35,
-                name: "MEJOS, ERMIEJEN Z.",
-                empNo: "2026-035",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "KATIPUNAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1036, type: "double maternity pay", particularsRaw: "Period covered: 04/01/2026-05/16/2026", month: "APRIL", amount: 0, dateReceived: "2026-07-29", dateReleased: "", remarks: "District: KATIPUNAN I" }
-                ]
-            },
-            {
-                id: 36,
-                name: "QUIJANO, DANILO B.",
-                empNo: "2026-036",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "KATIPUNAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1041, type: "cut-off & Retired", particularsRaw: "TIII STEP 1 TO TIII STEP 2- DECEASED", month: "JANUARY", amount: 11470.31, dateReceived: "2026-01-13", dateReleased: "2026-01-13", remarks: "District: KATIPUNAN I" }
-                ]
-            },
-            {
-                id: 37,
-                name: "LOZADA, JOSILITO Q.",
-                empNo: "2026-037",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "PONOT",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1042, type: "cut-off & Retired", particularsRaw: "LAST SALARY 08/01/2025-08/17/2025", month: "JANUARY", amount: 15723.95, dateReceived: "2026-01-15", dateReleased: "2026-01-15", remarks: "District: PONOT" }
-                ]
-            },
-            {
-                id: 38,
-                name: "CIANO, MARY JANE S.",
-                empNo: "2026-038",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "KATIPUNAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1043, type: "cut-off & Retired", particularsRaw: "CUT OFF 10/31/2025-11/30/2025", month: "JANUARY", amount: 33872.05, dateReceived: "2026-01-15", dateReleased: "2026-01-15", remarks: "District: KATIPUNAN I" }
-                ]
-            },
-            {
-                id: 39,
-                name: "BAGONDOL, MEANJIELICA V.",
-                empNo: "2026-039",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SERGIO OSEME\u00d1A II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1044, type: "cut-off & Retired", particularsRaw: "PVP 12/01-01/1/2025", month: "JANUARY", amount: 0, dateReceived: "2026-01-19", dateReleased: "2026-01-19", remarks: "District: SERGIO OSEME\u00d1A II" }
-                ]
-            },
-            {
-                id: 40,
-                name: "PACAS, JULIE AN B.",
-                empNo: "2026-040",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SERGIO OSEME\u00d1A I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1045, type: "cut-off & Retired", particularsRaw: "LAST SALARY 01/1-15/2026", month: "FEBRUARY", amount: 16386.19, dateReceived: "2026-02-02", dateReleased: "2026-02-05", remarks: "District: SERGIO OSEME\u00d1A I" }
-                ]
-            },
-            {
-                id: 41,
-                name: "PABIRAN, MAGDALENA M.",
-                empNo: "2026-041",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIAYAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1046, type: "cut-off & Retired", particularsRaw: "LAST SALARY 09/1-9/2025", month: "FEBRUARY", amount: 9171.66, dateReceived: "2026-02-04", dateReleased: "2026-02-05", remarks: "District: SIAYAN" }
-                ]
-            },
-            {
-                id: 42,
-                name: "ESTOLOGA, REMELIE M.",
-                empNo: "2026-042",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "MANUKAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1047, type: "cut-off & Retired", particularsRaw: "CUT OFF 10/1-6/2025 AND 11/8-30/2025", month: "FEBRUARY", amount: 30515.29, dateReceived: "2026-02-11", dateReleased: "2026-02-12", remarks: "District: MANUKAN I" }
-                ]
-            },
-            {
-                id: 43,
-                name: "BAGAIPO, RITA S.",
-                empNo: "2026-043",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "ROXAS I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1048, type: "cut-off & Retired", particularsRaw: "LAST SALARY 11/1-11/2025", month: "FEBRUARY", amount: 11887.84, dateReceived: "2026-02-12", dateReleased: "2026-02-13", remarks: "District: ROXAS I" }
-                ]
-            },
-            {
-                id: 44,
-                name: "PAGLINAWAN, GREGORIA C.",
-                empNo: "2026-044",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "GODOD II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1049, type: "cut-off & Retired", particularsRaw: "LAST SALARY 11/ 1/2025-11/17/2025", month: "FEBRUARY", amount: 19193.64, dateReceived: "2026-02-18", dateReleased: "2026-02-18", remarks: "District: GODOD II" }
-                ]
-            },
-            {
-                id: 45,
-                name: "LAURQUE, NAOMI T.",
-                empNo: "2026-045",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "POLANCO II",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1050, type: "cut-off & Retired", particularsRaw: "LAST SALARY 12/1-15/2025", month: "FEBRUARY", amount: 15669.34, dateReceived: "2026-02-19", dateReleased: "2026-02-20", remarks: "District: POLANCO II" }
-                ]
-            },
-            {
-                id: 46,
-                name: "BABIA, MERLYN S.",
-                empNo: "2026-046",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "GUTALAC I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1051, type: "cut-off & Retired", particularsRaw: "LAST SALARY 06/1-15/2025", month: "FEBRUARY", amount: 24024.30, dateReceived: "2026-02-20", dateReleased: "2026-02-24", remarks: "District: GUTALAC I" }
-                ]
-            },
-            {
-                id: 47,
-                name: "BORGONIA, JINKY L.",
-                empNo: "2026-047",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "LABASON",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1052, type: "cut-off & Retired", particularsRaw: "CUT OFF 09/15-30/2025", month: "FEBRUARY", amount: 14150.74, dateReceived: "2026-02-24", dateReleased: "2026-02-25", remarks: "District: LABASON" }
-                ]
-            },
-            {
-                id: 48,
-                name: "ESMAEL, NADZLA E.",
-                empNo: "2026-048",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "BALIGUIAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1053, type: "cut-off & Retired", particularsRaw: "CUT-OFF 02/1-28/2025", month: "MARCH", amount: 29424.94, dateReceived: "2026-03-02", dateReleased: "2026-04-22", remarks: "District: BALIGUIAN" },
-                    { id: 1054, type: "cut-off & Retired", particularsRaw: "CUT-OFF 06/1-30/2025", month: "MARCH", amount: 0, dateReceived: "2026-03-02", dateReleased: "", remarks: "District: BALIGUIAN" }
-                ]
-            },
-            {
-                id: 49,
-                name: "MORALES, LUZMINDA S.",
-                empNo: "2026-049",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "ROXAS I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1055, type: "cut-off & Retired", particularsRaw: "LAST SALARY 12/1-15/2025", month: "MARCH", amount: 15211.77, dateReceived: "2026-03-12", dateReleased: "2026-03-17", remarks: "District: ROXAS I" }
-                ]
-            },
-            {
-                id: 50,
-                name: "DERILO, AMIRA C.",
-                empNo: "2026-050",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SIBUCO",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1056, type: "cut-off & Retired", particularsRaw: "SALARY CLAIM-CUT OFF 8/18-31/2025", month: "MARCH", amount: 12637.70, dateReceived: "2026-03-19", dateReleased: "2026-04-23", remarks: "District: SIBUCO" }
-                ]
-            },
-            {
-                id: 51,
-                name: "QUINIMON, ESTRELLITA S.",
-                empNo: "2026-051",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SINDANGAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1057, type: "cut-off & Retired", particularsRaw: "CUT-OFF 11/1/2024-7/31/2025", month: "MARCH", amount: 185089.20, dateReceived: "2026-03-23", dateReleased: "2026-04-23", remarks: "District: SINDANGAN" }
-                ]
-            },
-            {
-                id: 52,
-                name: "DONGGO, MARY GOLD ROSEMAN O.",
-                empNo: "2026-052",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "PI\u00d1AN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1058, type: "cut-off & Retired", particularsRaw: "CUT OFF 02/01/2028-03/31/2028", month: "APRIL", amount: 59102.64, dateReceived: "2026-04-16", dateReleased: "2026-04-22", remarks: "District: PI\u00d1AN" }
-                ]
-            },
-            {
-                id: 53,
-                name: "OCUPE, MARY JERICA L.",
-                empNo: "2026-053",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "DIVISION",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1059, type: "cut-off & Retired", particularsRaw: "CUT-OFF SALARY 03/01/2026-03/31/2026", month: "JUNE", amount: 21644.35, dateReceived: "2026-06-01", dateReleased: "2026-06-01", remarks: "District: DIVISION" }
-                ]
-            },
-            {
-                id: 54,
-                name: "LIRAZAN, JULIET P.",
-                empNo: "2026-054",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SINDANGAN CENTRAL",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1060, type: "cut-off & Retired", particularsRaw: "RETIRED TIII STEP 2 TO TIII STEP 3", month: "JUNE", amount: 0, dateReceived: "2026-06-02", dateReleased: "", remarks: "District: SINDANGAN CENTRAL" },
-                    { id: 1061, type: "cut-off & Retired", particularsRaw: "LAST SALARY CLAIM 04/01/2026-04/9/2026", month: "JULY", amount: 0, dateReceived: "2026-07-28", dateReleased: "", remarks: "District: SINDANGAN CENTRAL" },
-                    { id: 1062, type: "cut-off & Retired", particularsRaw: "RETIRED PVP CLAIM 04/01/2026-06/07/2026", month: "JULY", amount: 0, dateReceived: "2026-07-28", dateReleased: "", remarks: "District: SINDANGAN CENTRAL" }
-                ]
-            },
-            {
-                id: 55,
-                name: "DUBDUBAN, FAIRELIN J.",
-                empNo: "2026-055",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "GUTALAC I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1063, type: "cut-off & Retired", particularsRaw: "CUT-OFF 12/1-31/25-1/1-31/26-2/1-28/26", month: "JUNE", amount: 0, dateReceived: "2026-06-22", dateReleased: "", remarks: "District: GUTALAC I" }
-                ]
-            },
-            {
-                id: 56,
-                name: "LUCRECIA, MA. RHEA B.",
-                empNo: "2026-056",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "SINDANGAN",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1064, type: "cut-off & Retired", particularsRaw: "CUT-OFF 1/1-31/2026", month: "JUNE", amount: 0, dateReceived: "2026-06-25", dateReleased: "", remarks: "District: SINDANGAN" }
-                ]
-            },
-            {
-                id: 57,
-                name: "GERALDEZ, JOEVARD C.",
-                empNo: "2026-057",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "TAMPILISAN I",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1065, type: "cut-off & Retired", particularsRaw: "DIFF PROMOTION MTI STEP 2 TO ASPII STEP 1", month: "JUNE", amount: 0, dateReceived: "2026-06-25", dateReleased: "", remarks: "District: TAMPILISAN I" }
-                ]
-            },
-            {
-                id: 58,
-                name: "CORDOVA, DANNY B.",
-                empNo: "2026-058",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "DIVISION-SDS",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1066, type: "cut-off & Retired", particularsRaw: "STEP SDS STEP1 TO SDS STEP 2 08/06/2024-09/01/2024", month: "JULY", amount: 1564.40, dateReceived: "2026-07-20", dateReleased: "2026-07-20", remarks: "District: DIVISION-SDS" }
-                ]
-            },
-            {
-                id: 59,
-                name: "BALAIS, FLORDELIZA S.",
-                empNo: "2026-059",
-                fds: "",
-                position: "Teacher I",
-                level: "Elementary",
-                station: "LABASON",
-                integration: "NON-INTEGRATED",
-                integrationDate: "",
-                claims: [
-                    { id: 1067, type: "cut-off & Retired", particularsRaw: "LAST SALARY CLAIM 01/01/2026-01/15/2026 -04/01/2026-05/31/2026", month: "JULY", amount: 0, dateReceived: "2026-07-28", dateReleased: "2026-07-28", remarks: "District: LABASON" }
-                ]
+        // ===================== AUTHENTICATION =====================
+        const ADMIN_USER = "admin";
+        const ADMIN_PASS = "deped2026";
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById("loginUser").value.trim();
+            const pass = document.getElementById("loginPass").value;
+
+            if (user === ADMIN_USER && pass === ADMIN_PASS) {
+                document.getElementById("login-screen").classList.add("hidden");
+                document.getElementById("app-content").classList.add("visible");
+                document.getElementById("loggedInUser").textContent = user;
+                sessionStorage.setItem("payrollLoggedIn", "true");
+                sessionStorage.setItem("payrollUser", user);
+                initApp();
+            } else {
+                document.getElementById("loginError").style.display = "block";
+                document.getElementById("loginPass").value = "";
+                document.getElementById("loginPass").focus();
             }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem("payrollLoggedIn");
+            sessionStorage.removeItem("payrollUser");
+            document.getElementById("app-content").classList.remove("visible");
+            document.getElementById("login-screen").classList.remove("hidden");
+            document.getElementById("loginUser").value = "";
+            document.getElementById("loginPass").value = "";
+            document.getElementById("loginError").style.display = "none";
+        }
+
+        function togglePassVisibility() {
+            const inp = document.getElementById("loginPass");
+            const icon = document.getElementById("togglePassIcon");
+            if (inp.type === "password") {
+                inp.type = "text";
+                icon.classList.replace("fa-eye", "fa-eye-slash");
+            } else {
+                inp.type = "password";
+                icon.classList.replace("fa-eye-slash", "fa-eye");
+            }
+        }
+
+        // Check session on page load
+        (function checkSession() {
+            if (sessionStorage.getItem("payrollLoggedIn") === "true") {
+                document.getElementById("login-screen").classList.add("hidden");
+                document.getElementById("app-content").classList.add("visible");
+                document.getElementById("loggedInUser").textContent = sessionStorage.getItem("payrollUser") || "Admin";
+                document.addEventListener("DOMContentLoaded", initApp);
+            }
+        })();
+
+        // ===================== APPLICATION DATA =====================
+        let employees = [
+            { id:1, name:"BAYLON, FLORITA L.", empNo:"2026-001", fds:"", position:"Teacher I", level:"Elementary", station:"LABASON", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1001, type:"Last salary", particularsRaw:"Period covered: 1/1/26-1/4/26", month:"JANUARY", amount:3058.92, dateReceived:"2026-04-05", dateReleased:"2026-04-22", remarks:"District: LABASON" },{ id:1040, type:"cut-off & Retired", particularsRaw:"LAST SALARY CLAIM", month:"APRIL", amount:0, dateReceived:"2026-04-15", dateReleased:"", remarks:"District: LABASON" }] },
+            { id:2, name:"MANAPSAL, ELIZA O.", empNo:"2026-002", fds:"", position:"Teacher I", level:"Elementary", station:"ROXAS I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1002, type:"Last salary", particularsRaw:"Period covered: 12/1/25-12/11/25", month:"DECEMBER", amount:22085.98, dateReceived:"2026-04-06", dateReleased:"2026-04-22", remarks:"District: ROXAS I" },{ id:1037, type:"cut-off & Retired", particularsRaw:"LAST PAY 12/1-11/2025", month:"APRIL", amount:0, dateReceived:"2026-04-06", dateReleased:"", remarks:"District: ROXAS I" }] },
+            { id:3, name:"MARTINEZ, FELINA M.", empNo:"2026-003", fds:"", position:"Teacher I", level:"Elementary", station:"SIAYAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1003, type:"Last salary", particularsRaw:"Period covered: 10/1/25-10/3/25", month:"OCTOBER", amount:4706.54, dateReceived:"2026-04-07", dateReleased:"2026-04-22", remarks:"District: SIAYAN" },{ id:1038, type:"cut-off & Retired", particularsRaw:"LAST SALARY CLAIM 10/1-3/2025", month:"APRIL", amount:0, dateReceived:"2026-04-07", dateReleased:"", remarks:"District: SIAYAN" }] },
+            { id:4, name:"MERIN, LUNETA D.", empNo:"2026-004", fds:"", position:"Teacher I", level:"Elementary", station:"LABASON", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1004, type:"Last salary", particularsRaw:"Period covered: 3/1/26-3/10/26", month:"MARCH", amount:16638.88, dateReceived:"2026-04-07", dateReleased:"2026-04-22", remarks:"District: LABASON" },{ id:1039, type:"cut-off & Retired", particularsRaw:"LAST SALARY CLAIM 03/01-10/2026", month:"APRIL", amount:0, dateReceived:"2026-04-15", dateReleased:"", remarks:"District: LABASON" }] },
+            { id:5, name:"OIDI, JULIA R.", empNo:"2026-005", fds:"", position:"Teacher I", level:"Elementary", station:"GUTALAC II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1005, type:"Last salary", particularsRaw:"Period covered: 1/1/26-1/15/26", month:"JANUARY", amount:39760.88, dateReceived:"2026-04-20", dateReleased:"2026-04-29", remarks:"District: GUTALAC II" }] },
+            { id:6, name:"CALAGUIAN, JANICE J.", empNo:"2026-006", fds:"", position:"Teacher I", level:"Elementary", station:"ROXAS I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1006, type:"Last salary", particularsRaw:"Period covered: 07/01/2026-07/15/2026", month:"JULY", amount:32124.30, dateReceived:"2026-07-21", dateReleased:"2026-07-27", remarks:"District: ROXAS I" }] },
+            { id:7, name:"GOMEZ, WENDYLEN D.", empNo:"2026-007", fds:"", position:"Teacher I", level:"Elementary", station:"KATIPUNAN IV", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1007, type:"double maternity pay", particularsRaw:"Period covered: 05/27/2025-06/15/2025", month:"MAY", amount:20042.39, dateReceived:"2026-01-13", dateReleased:"2026-01-13", remarks:"District: KATIPUNAN IV" }] },
+            { id:8, name:"SOLINDUM, MERRY ANN O.", empNo:"2026-008", fds:"", position:"Teacher I", level:"Elementary", station:"KATIPUNAN IV", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1008, type:"double maternity pay", particularsRaw:"Period covered: 05/17/2025-06/15/2025", month:"MAY", amount:33865.82, dateReceived:"2026-01-13", dateReleased:"2026-01-13", remarks:"District: KATIPUNAN IV" }] },
+            { id:9, name:"INSAIL, BADZRIA M.", empNo:"2026-009", fds:"", position:"Teacher I", level:"Elementary", station:"SIBUCO", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1009, type:"double maternity pay", particularsRaw:"Period covered: 04/16/2025-06/15/2025", month:"APRIL", amount:44067.48, dateReceived:"2026-01-14", dateReleased:"2026-01-14", remarks:"District: SIBUCO" }] },
+            { id:10, name:"UBAGAN, DVINE HAKESSA N.", empNo:"2026-010", fds:"", position:"Teacher I", level:"Elementary", station:"TAMPILISAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1010, type:"double maternity pay", particularsRaw:"Period covered: 04/07/2025-06/15/2025", month:"APRIL", amount:91693.11, dateReceived:"2026-01-21", dateReleased:"2026-01-21", remarks:"District: TAMPILISAN I" }] },
+            { id:11, name:"FLORES, JACQUELYN P.", empNo:"2026-011", fds:"", position:"Teacher I", level:"Elementary", station:"MUTIA", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1011, type:"double maternity pay", particularsRaw:"Period covered: 05/19/2025-06/15/2025", month:"MAY", amount:31645.11, dateReceived:"2026-01-23", dateReleased:"2026-01-23", remarks:"District: MUTIA" }] },
+            { id:12, name:"COTEJO, AILEEN P.", empNo:"2026-012", fds:"", position:"Teacher I", level:"Elementary", station:"KATIPUNAN IV", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1012, type:"double maternity pay", particularsRaw:"Period covered: 12/19/2022-1/3/2023", month:"DECEMBER", amount:13280.87, dateReceived:"2026-02-06", dateReleased:"2026-05-06", remarks:"District: KATIPUNAN IV" }] },
+            { id:13, name:"TILACAS, DIONECIA V.", empNo:"2026-013", fds:"", position:"Teacher I", level:"Elementary", station:"MANUKAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1013, type:"double maternity pay", particularsRaw:"Period covered: 6/9-15/2025", month:"JUNE", amount:8178.10, dateReceived:"2026-03-02", dateReleased:"2026-03-11", remarks:"District: MANUKAN I" }] },
+            { id:14, name:"SACAY, DEBBIE Z.", empNo:"2026-014", fds:"", position:"Teacher I", level:"Elementary", station:"SIBUCO", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1014, type:"double maternity pay", particularsRaw:"Period covered: 6/1/2025-6/15/2025", month:"JUNE", amount:15012.00, dateReceived:"2026-03-16", dateReleased:"2026-06-17", remarks:"District: SIBUCO" }] },
+            { id:15, name:"BESE, NORHAYATE M.", empNo:"2026-015", fds:"", position:"Teacher I", level:"Elementary", station:"LABASON", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1015, type:"double maternity pay", particularsRaw:"Period covered: 04/16/2025-06/15/2025", month:"APRIL", amount:60048.00, dateReceived:"2026-03-26", dateReleased:"2026-04-22", remarks:"District: LABASON" }] },
+            { id:16, name:"DAGPIN, ELENA B.", empNo:"2026-016", fds:"", position:"Teacher I", level:"Elementary", station:"BACUNGAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1016, type:"double maternity pay", particularsRaw:"Period covered: 05/26/2025-06/15/2025", month:"MAY", amount:21020.06, dateReceived:"2026-04-15", dateReleased:"2026-04-22", remarks:"District: BACUNGAN" }] },
+            { id:17, name:"JAMANI, RAIYANA A.", empNo:"2026-017", fds:"", position:"Teacher I", level:"Elementary", station:"SIBUCO I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1017, type:"double maternity pay", particularsRaw:"Period covered: 12/6/2023-1/2/2023", month:"DECEMBER", amount:14179.62, dateReceived:"2026-04-16", dateReleased:"2026-04-29", remarks:"District: SIBUCO I" }] },
+            { id:18, name:"CAINGLES, JANELYN O.", empNo:"2026-018", fds:"", position:"Teacher I", level:"Elementary", station:"SIAYAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1018, type:"double maternity pay", particularsRaw:"Period covered: 12/20/25-12/31/25-1/1/26-1/4/26", month:"DECEMBER", amount:17985.26, dateReceived:"2026-04-27", dateReleased:"2026-04-29", remarks:"District: SIAYAN" }] },
+            { id:19, name:"BALIGASA, RACHEL M.", empNo:"2026-019", fds:"", position:"Teacher I", level:"Elementary", station:"PONOT", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1019, type:"double maternity pay", particularsRaw:"Period covered: 12/20/25-12/31/25-1/1/26-1/4/26", month:"DECEMBER", amount:17985.55, dateReceived:"2026-04-27", dateReleased:"2026-04-29", remarks:"District: PONOT" }] },
+            { id:20, name:"ARGUEZA, HAHIA H.", empNo:"2026-020", fds:"", position:"Teacher I", level:"Elementary", station:"SIBUCO", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1020, type:"double maternity pay", particularsRaw:"Period covered: 04/19/25-04/30/25-05/01/25-05/31/25-06/01/25-06/15/25", month:"APRIL", amount:47275.58, dateReceived:"2026-05-13", dateReleased:"", remarks:"District: SIBUCO" }] },
+            { id:21, name:"ANSOC, DEXIE REGENCIA", empNo:"2026-021", fds:"", position:"Teacher I", level:"Elementary", station:"GUTALAC II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1021, type:"double maternity pay", particularsRaw:"Period covered: 12/23-31/2024 - 1/1-4/2025", month:"DECEMBER", amount:12773.90, dateReceived:"2026-05-28", dateReleased:"2026-06-01", remarks:"District: GUTALAC II" }] },
+            { id:22, name:"VILLEJO, CHERRY MAE", empNo:"2026-022", fds:"", position:"Teacher I", level:"Elementary", station:"PONOT", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1022, type:"double maternity pay", particularsRaw:"Period covered: 12/20-31-2025 - 1/1-4/2026", month:"DECEMBER", amount:15713.16, dateReceived:"2026-05-28", dateReleased:"2026-06-01", remarks:"District: PONOT" }] },
+            { id:23, name:"RUMANDAN, ANALYN B.", empNo:"2026-023", fds:"", position:"Teacher I", level:"Elementary", station:"KATIPUNAN II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1023, type:"double maternity pay", particularsRaw:"Period covered: 12/22-31/25-1/1-5/2026", month:"DECEMBER", amount:0, dateReceived:"2026-06-22", dateReleased:"", remarks:"District: KATIPUNAN II" },{ id:1024, type:"double maternity pay", particularsRaw:"Period covered: 12/20-31/25-1/1-4/2026", month:"DECEMBER", amount:0, dateReceived:"2026-06-25", dateReleased:"", remarks:"District: KATIPUNAN II" }] },
+            { id:24, name:"DOMPALES, JENNYCA M.", empNo:"2026-024", fds:"", position:"Teacher I", level:"Elementary", station:"SIAYAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1025, type:"double maternity pay", particularsRaw:"Period covered: 12/20-31/25-1/1-4/2026", month:"DECEMBER", amount:0, dateReceived:"2026-06-25", dateReleased:"", remarks:"District: SIAYAN" }] },
+            { id:25, name:"CASTRO, JESSEL C.", empNo:"2026-025", fds:"", position:"Teacher I", level:"Elementary", station:"SINDANGAN CENTRAL", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1026, type:"double maternity pay", particularsRaw:"Period covered: 04/01/2026-05/28/2026", month:"APRIL", amount:68754.03, dateReceived:"2026-06-29", dateReleased:"2026-07-20", remarks:"District: SINDANGAN CENTRAL" }] },
+            { id:26, name:"MURING, LOREN E.", empNo:"2026-026", fds:"", position:"Teacher I", level:"Elementary", station:"PONOT I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1027, type:"double maternity pay", particularsRaw:"Period covered: 12/22-31/25-1/1-5/26-4/1-4/2026", month:"DECEMBER", amount:21785.67, dateReceived:"2026-07-08", dateReleased:"2026-07-20", remarks:"District: PONOT I" }] },
+            { id:27, name:"TEMORCINA, REINA T.", empNo:"2026-027", fds:"", position:"Teacher I", level:"Elementary", station:"MANUKAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1028, type:"double maternity pay", particularsRaw:"Period covered: 12/20/2025-01/04/2026", month:"DECEMBER", amount:17985.55, dateReceived:"2026-07-21", dateReleased:"2026-07-27", remarks:"District: MANUKAN I" }] },
+            { id:28, name:"MACROHON, ANNALIZA P.", empNo:"2026-028", fds:"", position:"Teacher I", level:"Elementary", station:"SIAYAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1029, type:"double maternity pay", particularsRaw:"Period covered: 12/20/2025-01/04/2026", month:"DECEMBER", amount:17985.55, dateReceived:"2026-07-21", dateReleased:"2026-07-27", remarks:"District: SIAYAN" }] },
+            { id:29, name:"TOTAO, IVY D.", empNo:"2026-029", fds:"", position:"Teacher I", level:"Elementary", station:"SIAYAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1030, type:"double maternity pay", particularsRaw:"Period covered: 12/20/2025-01/04/2026", month:"DECEMBER", amount:17985.55, dateReceived:"2026-07-21", dateReleased:"2026-07-27", remarks:"District: SIAYAN" }] },
+            { id:30, name:"PACULBA, MICHELLE", empNo:"2026-030", fds:"", position:"Teacher I", level:"Elementary", station:"LABASON", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1031, type:"double maternity pay", particularsRaw:"Period covered: 12/20/2025-01/04/2026", month:"DECEMBER", amount:17985.55, dateReceived:"2026-07-22", dateReleased:"2026-07-28", remarks:"District: LABASON" }] },
+            { id:31, name:"ARASAD, NOR-IN P.", empNo:"2026-031", fds:"", position:"Teacher I", level:"Elementary", station:"SIBUCO I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1032, type:"double maternity pay", particularsRaw:"Period covered: 12/18/2025-01/04/2026", month:"DECEMBER", amount:17985.55, dateReceived:"2026-07-22", dateReleased:"2026-07-28", remarks:"District: SIBUCO I" }] },
+            { id:32, name:"BATTING, ROBIA P.", empNo:"2026-032", fds:"", position:"Teacher I", level:"Elementary", station:"SIRAWAI I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1033, type:"double maternity pay", particularsRaw:"Period covered: 12/20/2025-01/04/2026", month:"DECEMBER", amount:15713.16, dateReceived:"2026-07-22", dateReleased:"2026-07-28", remarks:"District: SIRAWAI I" }] },
+            { id:33, name:"LIMOSNERO, ANGEL G.", empNo:"2026-033", fds:"", position:"Teacher I", level:"Elementary", station:"ROXAS II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1034, type:"double maternity pay", particularsRaw:"Period covered: 04/01/2026-04/27/2026", month:"APRIL", amount:0, dateReceived:"2026-07-24", dateReleased:"", remarks:"District: ROXAS II" }] },
+            { id:34, name:"PAMAGAN, MARY ROSE E.", empNo:"2026-034", fds:"", position:"Teacher I", level:"Elementary", station:"ROXAS II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1035, type:"double maternity pay", particularsRaw:"Period covered: 04/01/2026-05/07/2026", month:"APRIL", amount:0, dateReceived:"2026-07-28", dateReleased:"", remarks:"District: ROXAS II" }] },
+            { id:35, name:"MEJOS, ERMIEJEN Z.", empNo:"2026-035", fds:"", position:"Teacher I", level:"Elementary", station:"KATIPUNAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1036, type:"double maternity pay", particularsRaw:"Period covered: 04/01/2026-05/16/2026", month:"APRIL", amount:0, dateReceived:"2026-07-29", dateReleased:"", remarks:"District: KATIPUNAN I" }] },
+            { id:36, name:"QUIJANO, DANILO B.", empNo:"2026-036", fds:"", position:"Teacher I", level:"Elementary", station:"KATIPUNAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1041, type:"cut-off & Retired", particularsRaw:"TIII STEP 1 TO TIII STEP 2- DECEASED", month:"JANUARY", amount:11470.31, dateReceived:"2026-01-13", dateReleased:"2026-01-13", remarks:"District: KATIPUNAN I" }] },
+            { id:37, name:"LOZADA, JOSILITO Q.", empNo:"2026-037", fds:"", position:"Teacher I", level:"Elementary", station:"PONOT", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1042, type:"cut-off & Retired", particularsRaw:"LAST SALARY 08/01/2025-08/17/2025", month:"JANUARY", amount:15723.95, dateReceived:"2026-01-15", dateReleased:"2026-01-15", remarks:"District: PONOT" }] },
+            { id:38, name:"CIANO, MARY JANE S.", empNo:"2026-038", fds:"", position:"Teacher I", level:"Elementary", station:"KATIPUNAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1043, type:"cut-off & Retired", particularsRaw:"CUT OFF 10/31/2025-11/30/2025", month:"JANUARY", amount:33872.05, dateReceived:"2026-01-15", dateReleased:"2026-01-15", remarks:"District: KATIPUNAN I" }] },
+            { id:39, name:"BAGONDOL, MEANJIELICA V.", empNo:"2026-039", fds:"", position:"Teacher I", level:"Elementary", station:"SERGIO OSEME\u00d1A II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1044, type:"cut-off & Retired", particularsRaw:"PVP 12/01-01/1/2025", month:"JANUARY", amount:0, dateReceived:"2026-01-19", dateReleased:"2026-01-19", remarks:"District: SERGIO OSEME\u00d1A II" }] },
+            { id:40, name:"PACAS, JULIE AN B.", empNo:"2026-040", fds:"", position:"Teacher I", level:"Elementary", station:"SERGIO OSEME\u00d1A I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1045, type:"cut-off & Retired", particularsRaw:"LAST SALARY 01/1-15/2026", month:"FEBRUARY", amount:16386.19, dateReceived:"2026-02-02", dateReleased:"2026-02-05", remarks:"District: SERGIO OSEME\u00d1A I" }] },
+            { id:41, name:"PABIRAN, MAGDALENA M.", empNo:"2026-041", fds:"", position:"Teacher I", level:"Elementary", station:"SIAYAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1046, type:"cut-off & Retired", particularsRaw:"LAST SALARY 09/1-9/2025", month:"FEBRUARY", amount:9171.66, dateReceived:"2026-02-04", dateReleased:"2026-02-05", remarks:"District: SIAYAN" }] },
+            { id:42, name:"ESTOLOGA, REMELIE M.", empNo:"2026-042", fds:"", position:"Teacher I", level:"Elementary", station:"MANUKAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1047, type:"cut-off & Retired", particularsRaw:"CUT OFF 10/1-6/2025 AND 11/8-30/2025", month:"FEBRUARY", amount:30515.29, dateReceived:"2026-02-11", dateReleased:"2026-02-12", remarks:"District: MANUKAN I" }] },
+            { id:43, name:"BAGAIPO, RITA S.", empNo:"2026-043", fds:"", position:"Teacher I", level:"Elementary", station:"ROXAS I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1048, type:"cut-off & Retired", particularsRaw:"LAST SALARY 11/1-11/2025", month:"FEBRUARY", amount:11887.84, dateReceived:"2026-02-12", dateReleased:"2026-02-13", remarks:"District: ROXAS I" }] },
+            { id:44, name:"PAGLINAWAN, GREGORIA C.", empNo:"2026-044", fds:"", position:"Teacher I", level:"Elementary", station:"GODOD II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1049, type:"cut-off & Retired", particularsRaw:"LAST SALARY 11/ 1/2025-11/17/2025", month:"FEBRUARY", amount:19193.64, dateReceived:"2026-02-18", dateReleased:"2026-02-18", remarks:"District: GODOD II" }] },
+            { id:45, name:"LAURQUE, NAOMI T.", empNo:"2026-045", fds:"", position:"Teacher I", level:"Elementary", station:"POLANCO II", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1050, type:"cut-off & Retired", particularsRaw:"LAST SALARY 12/1-15/2025", month:"FEBRUARY", amount:15669.34, dateReceived:"2026-02-19", dateReleased:"2026-02-20", remarks:"District: POLANCO II" }] },
+            { id:46, name:"BABIA, MERLYN S.", empNo:"2026-046", fds:"", position:"Teacher I", level:"Elementary", station:"GUTALAC I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1051, type:"cut-off & Retired", particularsRaw:"LAST SALARY 06/1-15/2025", month:"FEBRUARY", amount:24024.30, dateReceived:"2026-02-20", dateReleased:"2026-02-24", remarks:"District: GUTALAC I" }] },
+            { id:47, name:"BORGONIA, JINKY L.", empNo:"2026-047", fds:"", position:"Teacher I", level:"Elementary", station:"LABASON", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1052, type:"cut-off & Retired", particularsRaw:"CUT OFF 09/15-30/2025", month:"FEBRUARY", amount:14150.74, dateReceived:"2026-02-24", dateReleased:"2026-02-25", remarks:"District: LABASON" }] },
+            { id:48, name:"ESMAEL, NADZLA E.", empNo:"2026-048", fds:"", position:"Teacher I", level:"Elementary", station:"BALIGUIAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1053, type:"cut-off & Retired", particularsRaw:"CUT-OFF 02/1-28/2025", month:"MARCH", amount:29424.94, dateReceived:"2026-03-02", dateReleased:"2026-04-22", remarks:"District: BALIGUIAN" },{ id:1054, type:"cut-off & Retired", particularsRaw:"CUT-OFF 06/1-30/2025", month:"MARCH", amount:0, dateReceived:"2026-03-02", dateReleased:"", remarks:"District: BALIGUIAN" }] },
+            { id:49, name:"MORALES, LUZMINDA S.", empNo:"2026-049", fds:"", position:"Teacher I", level:"Elementary", station:"ROXAS I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1055, type:"cut-off & Retired", particularsRaw:"LAST SALARY 12/1-15/2025", month:"MARCH", amount:15211.77, dateReceived:"2026-03-12", dateReleased:"2026-03-17", remarks:"District: ROXAS I" }] },
+            { id:50, name:"DERILO, AMIRA C.", empNo:"2026-050", fds:"", position:"Teacher I", level:"Elementary", station:"SIBUCO", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1056, type:"cut-off & Retired", particularsRaw:"SALARY CLAIM-CUT OFF 8/18-31/2025", month:"MARCH", amount:12637.70, dateReceived:"2026-03-19", dateReleased:"2026-04-23", remarks:"District: SIBUCO" }] },
+            { id:51, name:"QUINIMON, ESTRELLITA S.", empNo:"2026-051", fds:"", position:"Teacher I", level:"Elementary", station:"SINDANGAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1057, type:"cut-off & Retired", particularsRaw:"CUT-OFF 11/1/2024-7/31/2025", month:"MARCH", amount:185089.20, dateReceived:"2026-03-23", dateReleased:"2026-04-23", remarks:"District: SINDANGAN" }] },
+            { id:52, name:"DONGGO, MARY GOLD ROSEMAN O.", empNo:"2026-052", fds:"", position:"Teacher I", level:"Elementary", station:"PI\u00d1AN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1058, type:"cut-off & Retired", particularsRaw:"CUT OFF 02/01/2028-03/31/2028", month:"APRIL", amount:59102.64, dateReceived:"2026-04-16", dateReleased:"2026-04-22", remarks:"District: PI\u00d1AN" }] },
+            { id:53, name:"OCUPE, MARY JERICA L.", empNo:"2026-053", fds:"", position:"Teacher I", level:"Elementary", station:"DIVISION", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1059, type:"cut-off & Retired", particularsRaw:"CUT-OFF SALARY 03/01/2026-03/31/2026", month:"JUNE", amount:21644.35, dateReceived:"2026-06-01", dateReleased:"2026-06-01", remarks:"District: DIVISION" }] },
+            { id:54, name:"LIRAZAN, JULIET P.", empNo:"2026-054", fds:"", position:"Teacher I", level:"Elementary", station:"SINDANGAN CENTRAL", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1060, type:"cut-off & Retired", particularsRaw:"RETIRED TIII STEP 2 TO TIII STEP 3", month:"JUNE", amount:0, dateReceived:"2026-06-02", dateReleased:"", remarks:"District: SINDANGAN CENTRAL" },{ id:1061, type:"cut-off & Retired", particularsRaw:"LAST SALARY CLAIM 04/01/2026-04/9/2026", month:"JULY", amount:0, dateReceived:"2026-07-28", dateReleased:"", remarks:"District: SINDANGAN CENTRAL" },{ id:1062, type:"cut-off & Retired", particularsRaw:"RETIRED PVP CLAIM 04/01/2026-06/07/2026", month:"JULY", amount:0, dateReceived:"2026-07-28", dateReleased:"", remarks:"District: SINDANGAN CENTRAL" }] },
+            { id:55, name:"DUBDUBAN, FAIRELIN J.", empNo:"2026-055", fds:"", position:"Teacher I", level:"Elementary", station:"GUTALAC I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1063, type:"cut-off & Retired", particularsRaw:"CUT-OFF 12/1-31/25-1/1-31/26-2/1-28/26", month:"JUNE", amount:0, dateReceived:"2026-06-22", dateReleased:"", remarks:"District: GUTALAC I" }] },
+            { id:56, name:"LUCRECIA, MA. RHEA B.", empNo:"2026-056", fds:"", position:"Teacher I", level:"Elementary", station:"SINDANGAN", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1064, type:"cut-off & Retired", particularsRaw:"CUT-OFF 1/1-31/2026", month:"JUNE", amount:0, dateReceived:"2026-06-25", dateReleased:"", remarks:"District: SINDANGAN" }] },
+            { id:57, name:"GERALDEZ, JOEVARD C.", empNo:"2026-057", fds:"", position:"Teacher I", level:"Elementary", station:"TAMPILISAN I", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1065, type:"cut-off & Retired", particularsRaw:"DIFF PROMOTION MTI STEP 2 TO ASPII STEP 1", month:"JUNE", amount:0, dateReceived:"2026-06-25", dateReleased:"", remarks:"District: TAMPILISAN I" }] },
+            { id:58, name:"CORDOVA, DANNY B.", empNo:"2026-058", fds:"", position:"Teacher I", level:"Elementary", station:"DIVISION-SDS", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1066, type:"cut-off & Retired", particularsRaw:"STEP SDS STEP1 TO SDS STEP 2 08/06/2024-09/01/2024", month:"JULY", amount:1564.40, dateReceived:"2026-07-20", dateReleased:"2026-07-20", remarks:"District: DIVISION-SDS" }] },
+            { id:59, name:"BALAIS, FLORDELIZA S.", empNo:"2026-059", fds:"", position:"Teacher I", level:"Elementary", station:"LABASON", integration:"NON-INTEGRATED", integrationDate:"", claims:[{ id:1067, type:"cut-off & Retired", particularsRaw:"LAST SALARY CLAIM 01/01/2026-01/15/2026 -04/01/2026-05/31/2026", month:"JULY", amount:0, dateReceived:"2026-07-28", dateReleased:"2026-07-28", remarks:"District: LABASON" }] }
         ];
 
         let currentActiveEmpId = null;
-
-        // Pagination state
         const pageSize = 25;
         let masterlistPage = 1;
         let masterlistData = employees;
         let allClaimsPage = 1;
         let allClaimsData = [];
 
-        // Initialize App
-        document.addEventListener("DOMContentLoaded", () => {
+        function initApp() {
             renderEmployees();
             renderDashboard();
             renderMatrix();
             renderAllClaims();
-        });
+        }
 
-        // Tab Switching
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
-
             document.getElementById(`btn-tab-${tab}`).classList.add('active');
             document.getElementById(`tab-${tab}`).style.display = 'block';
-
             if (tab === 'dashboard') renderDashboard();
             if (tab === 'matrix') renderMatrix();
             if (tab === 'allclaims') renderAllClaims();
             if (tab === 'masterlist') renderEmployees();
         }
 
-        // Render Masterlist Table (paginated)
         function renderEmployees(dataToRender = employees) {
             masterlistData = dataToRender;
             const tbody = document.getElementById("employee-table-body");
             tbody.innerHTML = "";
-
             const totalPages = Math.max(1, Math.ceil(masterlistData.length / pageSize));
             if (masterlistPage > totalPages) masterlistPage = totalPages;
             if (masterlistPage < 1) masterlistPage = 1;
-
             if (masterlistData.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding:30px; color:#94a3b8;">No matching employee records found.</td></tr>`;
                 buildPagination(document.getElementById("masterlistPagination"), 1, 1, 0, goMasterlistPage, () => goMasterlistPage(masterlistPage - 1), () => goMasterlistPage(masterlistPage + 1), pageSize);
                 return;
             }
-
             const start = (masterlistPage - 1) * pageSize;
             const pageData = masterlistData.slice(start, start + pageSize);
-
             pageData.forEach((emp, index) => {
                 const globalIndex = start + index;
                 const totalAmt = emp.claims.reduce((sum, c) => sum + parseFloat(c.amount || 0), 0);
                 const hasPending = emp.claims.some(c => !c.dateReleased);
-                
                 let levelBadge = `<span class="badge badge-elem">Elem</span>`;
                 if (emp.level === "Secondary") levelBadge = `<span class="badge badge-sec">Sec</span>`;
                 if (emp.level === "SDO") levelBadge = `<span class="badge badge-SDO">SDO</span>`;
-
-                let intBadge = emp.integration === "INTEGRATED" 
-                    ? `<span class="badge badge-integrated">INTEGRATED</span>` 
-                    : `<span class="badge badge-non-integrated">NON-INTEGRATED</span>`;
-
+                let intBadge = emp.integration === "INTEGRATED" ? `<span class="badge badge-integrated">INTEGRATED</span>` : `<span class="badge badge-non-integrated">NON-INTEGRATED</span>`;
                 let statusBadge = `<span class="badge badge-none">No Claims</span>`;
                 if (emp.claims.length > 0) {
-                    statusBadge = hasPending 
-                        ? `<span class="badge badge-pending">Pending Disbursal</span>` 
-                        : `<span class="badge badge-released">All Disbursed</span>`;
+                    statusBadge = hasPending ? `<span class="badge badge-pending">Pending Disbursal</span>` : `<span class="badge badge-released">All Disbursed</span>`;
                 }
-
-                let claimsSummary = emp.claims.map(c => 
-                    `<span class="badge badge-claim">${c.type} (${c.month})</span>`
-                ).join(" ") || `<span style="color:#94a3b8; font-size:0.8rem;">None</span>`;
-
+                let claimsSummary = emp.claims.map(c => `<span class="badge badge-claim">${c.type} (${c.month})</span>`).join(" ") || `<span style="color:#94a3b8; font-size:0.8rem;">None</span>`;
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td>${globalIndex + 1}</td>
@@ -2216,11 +1589,9 @@
                             <button class="btn btn-outline btn-sm" title="Edit Employee" onclick="openEditEmpModal(${emp.id})"><i class="fa-solid fa-pen"></i></button>
                             <button class="btn btn-danger btn-sm" title="Delete Employee" onclick="deleteEmployee(${emp.id})"><i class="fa-solid fa-trash"></i></button>
                         </div>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
-
             buildPagination(document.getElementById("masterlistPagination"), masterlistPage, totalPages, masterlistData.length, goMasterlistPage, () => goMasterlistPage(masterlistPage - 1), () => goMasterlistPage(masterlistPage + 1), pageSize);
         }
 
@@ -2231,27 +1602,18 @@
             renderEmployees(masterlistData);
         }
 
-        // Masterlist Filtering
         function filterData() {
             const search = document.getElementById("searchInput").value.toLowerCase();
             const level = document.getElementById("filterLevel").value;
             const claimType = document.getElementById("filterClaimType").value.toLowerCase();
             const integration = document.getElementById("filterIntegration").value;
-
             const filtered = employees.filter(emp => {
-                const matchesSearch = emp.name.toLowerCase().includes(search) || 
-                                      emp.empNo.toLowerCase().includes(search) || 
-                                      emp.position.toLowerCase().includes(search) ||
-                                      emp.station.toLowerCase().includes(search) ||
-                                      (emp.fds && emp.fds.includes(search));
-
+                const matchesSearch = emp.name.toLowerCase().includes(search) || emp.empNo.toLowerCase().includes(search) || emp.position.toLowerCase().includes(search) || emp.station.toLowerCase().includes(search) || (emp.fds && emp.fds.includes(search));
                 const matchesLevel = !level || emp.level === level;
                 const matchesIntegration = !integration || emp.integration === integration;
                 const matchesClaim = !claimType || emp.claims.some(c => c.type.toLowerCase().includes(claimType));
-
                 return matchesSearch && matchesLevel && matchesIntegration && matchesClaim;
             });
-
             masterlistPage = 1;
             renderEmployees(filtered);
         }
@@ -2265,46 +1627,25 @@
             renderEmployees();
         }
 
-        // ALL CLAIMS TAB LOG VIEW (paginated)
         function renderAllClaims(claimsData = null) {
             const tbody = document.getElementById("all-claims-table-body");
             tbody.innerHTML = "";
-
             let allClaimsList = [];
-            employees.forEach(emp => {
-                emp.claims.forEach(c => {
-                    allClaimsList.push({
-                        ...c,
-                        empName: emp.name,
-                        empPosition: emp.position,
-                        empLevel: emp.level,
-                        empStation: emp.station,
-                        empId: emp.id
-                    });
-                });
-            });
-
+            employees.forEach(emp => { emp.claims.forEach(c => { allClaimsList.push({ ...c, empName: emp.name, empPosition: emp.position, empLevel: emp.level, empStation: emp.station, empId: emp.id }); }); });
             allClaimsData = claimsData || allClaimsList;
-
             const totalPages = Math.max(1, Math.ceil(allClaimsData.length / pageSize));
             if (allClaimsPage > totalPages) allClaimsPage = totalPages;
             if (allClaimsPage < 1) allClaimsPage = 1;
-
             if (allClaimsData.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; padding:30px; color:#94a3b8;">No claims matching filter criteria.</td></tr>`;
                 buildPagination(document.getElementById("allClaimsPagination"), 1, 1, 0, goAllClaimsPage, () => goAllClaimsPage(allClaimsPage - 1), () => goAllClaimsPage(allClaimsPage + 1), pageSize);
                 return;
             }
-
             const start = (allClaimsPage - 1) * pageSize;
             const pageData = allClaimsData.slice(start, start + pageSize);
-
             pageData.forEach((c, idx) => {
                 const globalIdx = start + idx;
-                let statusBadge = c.dateReleased 
-                    ? `<span class="badge badge-released">Released</span>` 
-                    : `<span class="badge badge-pending">Pending</span>`;
-
+                let statusBadge = c.dateReleased ? `<span class="badge badge-released">Released</span>` : `<span class="badge badge-pending">Pending</span>`;
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td>${globalIdx + 1}</td>
@@ -2318,13 +1659,9 @@
                     <td>${c.dateReleased || '-'}</td>
                     <td style="max-width: 180px; white-space: normal;"><small>${c.remarks || '-'}</small></td>
                     <td>${statusBadge}</td>
-                    <td style="text-align: center;">
-                        <button class="btn btn-outline btn-sm" onclick="openViewClaimsModal(${c.empId})"><i class="fa-solid fa-folder-open"></i> Manage</button>
-                    </td>
-                `;
+                    <td style="text-align: center;"><button class="btn btn-outline btn-sm" onclick="openViewClaimsModal(${c.empId})"><i class="fa-solid fa-folder-open"></i> Manage</button></td>`;
                 tbody.appendChild(tr);
             });
-
             buildPagination(document.getElementById("allClaimsPagination"), allClaimsPage, totalPages, allClaimsData.length, goAllClaimsPage, () => goAllClaimsPage(allClaimsPage - 1), () => goAllClaimsPage(allClaimsPage + 1), pageSize);
         }
 
@@ -2338,22 +1675,18 @@
         function buildPagination(container, currentPage, totalPages, totalCount, onGo, onPrev, onNext, size) {
             if (!container) return;
             container.innerHTML = "";
-
             const start = (currentPage - 1) * size;
             const end = Math.min(totalCount, start + size);
-
             const info = document.createElement("span");
             info.className = "page-info";
             info.textContent = totalCount > 0 ? `Showing ${start + 1}-${end} of ${totalCount}` : "No records";
             container.appendChild(info);
-
             const prevBtn = document.createElement("button");
             prevBtn.className = "page-btn";
             prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Prev';
             prevBtn.disabled = currentPage <= 1;
             prevBtn.onclick = onPrev;
             container.appendChild(prevBtn);
-
             for (let p = 1; p <= totalPages; p++) {
                 const btn = document.createElement("button");
                 btn.className = "page-btn" + (p === currentPage ? " active" : "");
@@ -2361,7 +1694,6 @@
                 btn.onclick = () => onGo(p);
                 container.appendChild(btn);
             }
-
             const nextBtn = document.createElement("button");
             nextBtn.className = "page-btn";
             nextBtn.innerHTML = 'Next <i class="fa-solid fa-chevron-right"></i>';
@@ -2375,38 +1707,17 @@
             const month = document.getElementById("allClaimsFilterMonth").value;
             const claimType = document.getElementById("allClaimsFilterType").value.toLowerCase();
             const status = document.getElementById("allClaimsFilterStatus").value;
-
             let allClaimsList = [];
-            employees.forEach(emp => {
-                emp.claims.forEach(c => {
-                    allClaimsList.push({
-                        ...c,
-                        empName: emp.name,
-                        empPosition: emp.position,
-                        empLevel: emp.level,
-                        empStation: emp.station,
-                        empId: emp.id
-                    });
-                });
-            });
-
+            employees.forEach(emp => { emp.claims.forEach(c => { allClaimsList.push({ ...c, empName: emp.name, empPosition: emp.position, empLevel: emp.level, empStation: emp.station, empId: emp.id }); }); });
             const filtered = allClaimsList.filter(c => {
-                const matchesSearch = c.empName.toLowerCase().includes(search) || 
-                                      c.empPosition.toLowerCase().includes(search) || 
-                                      c.empStation.toLowerCase().includes(search) ||
-                                      (c.particularsRaw && c.particularsRaw.toLowerCase().includes(search)) ||
-                                      (c.remarks && c.remarks.toLowerCase().includes(search));
-
+                const matchesSearch = c.empName.toLowerCase().includes(search) || c.empPosition.toLowerCase().includes(search) || c.empStation.toLowerCase().includes(search) || (c.particularsRaw && c.particularsRaw.toLowerCase().includes(search)) || (c.remarks && c.remarks.toLowerCase().includes(search));
                 const matchesMonth = !month || c.month === month;
                 const matchesType = !claimType || c.type.toLowerCase().includes(claimType);
-                
                 let matchesStatus = true;
                 if (status === "RELEASED") matchesStatus = !!c.dateReleased;
                 if (status === "PENDING") matchesStatus = !c.dateReleased;
-
                 return matchesSearch && matchesMonth && matchesType && matchesStatus;
             });
-
             allClaimsPage = 1;
             renderAllClaims(filtered);
         }
@@ -2420,18 +1731,14 @@
             renderAllClaims();
         }
 
-        // View Individual Claims Modal
         function openViewClaimsModal(empId) {
             currentActiveEmpId = empId;
             const emp = employees.find(e => e.id === empId);
             if (!emp) return;
-
             document.getElementById("viewClaimEmpName").innerText = emp.name;
             document.getElementById("viewClaimEmpMeta").innerText = `${emp.position} | ${emp.station} | ${emp.integration} (${emp.empNo})`;
-
             const addBtn = document.getElementById("viewClaimAddBtn");
             addBtn.onclick = () => openAddClaimModal(emp.id);
-
             renderIndividualClaimsList(emp);
             openModal("viewClaimsModal");
         }
@@ -2439,17 +1746,12 @@
         function renderIndividualClaimsList(emp) {
             const tbody = document.getElementById("viewClaimsTableBody");
             tbody.innerHTML = "";
-
             if (emp.claims.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:20px; color:#94a3b8;">No claims recorded for this employee.</td></tr>`;
                 return;
             }
-
             emp.claims.forEach(c => {
-                let statusBadge = c.dateReleased 
-                    ? `<span class="badge badge-released">Released</span>` 
-                    : `<span class="badge badge-pending">Pending</span>`;
-
+                let statusBadge = c.dateReleased ? `<span class="badge badge-released">Released</span>` : `<span class="badge badge-pending">Pending</span>`;
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td><strong>${c.type}</strong></td>
@@ -2463,66 +1765,40 @@
                     <td style="text-align: center;">
                         <button class="btn btn-outline btn-sm" onclick="openEditClaimModal(${emp.id}, ${c.id})"><i class="fa-solid fa-pen"></i></button>
                         <button class="btn btn-danger btn-sm" onclick="deleteClaim(${emp.id}, ${c.id})"><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
         }
 
-        // DASHBOARD SUMMARY RENDER
         function renderDashboard() {
             document.getElementById("stat-total-emp").innerText = employees.length;
-            
             const integratedCount = employees.filter(e => e.integration === "INTEGRATED").length;
             document.getElementById("stat-integrated-emp").innerText = integratedCount;
-
-            let totalClaimsCount = 0;
-            let totalAmount = 0;
-            let releasedAmount = 0;
-            let pendingAmount = 0;
-
-            const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+            let totalClaimsCount = 0, totalAmount = 0, releasedAmount = 0, pendingAmount = 0;
+            const months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
             const monthSummary = {};
             months.forEach(m => monthSummary[m] = { count: 0, total: 0, released: 0, pending: 0 });
-
-            employees.forEach(emp => {
-                emp.claims.forEach(c => {
-                    totalClaimsCount++;
-                    const amt = parseFloat(c.amount || 0);
-                    totalAmount += amt;
-
-                    if (c.dateReleased) {
-                        releasedAmount += amt;
-                    } else {
-                        pendingAmount += amt;
-                    }
-
-                    if (monthSummary[c.month]) {
-                        monthSummary[c.month].count++;
-                        monthSummary[c.month].total += amt;
-                        if (c.dateReleased) monthSummary[c.month].released += amt;
-                        else monthSummary[c.month].pending += amt;
-                    }
-                });
-            });
-
+            employees.forEach(emp => { emp.claims.forEach(c => {
+                totalClaimsCount++;
+                const amt = parseFloat(c.amount || 0);
+                totalAmount += amt;
+                if (c.dateReleased) releasedAmount += amt; else pendingAmount += amt;
+                if (monthSummary[c.month]) {
+                    monthSummary[c.month].count++;
+                    monthSummary[c.month].total += amt;
+                    if (c.dateReleased) monthSummary[c.month].released += amt; else monthSummary[c.month].pending += amt;
+                }
+            }); });
             document.getElementById("stat-claim-count").innerText = totalClaimsCount;
             document.getElementById("stat-total-amt").innerText = `₱${totalAmount.toLocaleString('en-US', {minimumFractionDigits:2})}`;
             document.getElementById("stat-released-amt").innerText = `₱${releasedAmount.toLocaleString('en-US', {minimumFractionDigits:2})}`;
             document.getElementById("stat-pending-amt").innerText = `₱${pendingAmount.toLocaleString('en-US', {minimumFractionDigits:2})}`;
-
             const monthlyTbody = document.getElementById("monthly-summary-body");
             monthlyTbody.innerHTML = "";
-
             months.forEach(m => {
                 const data = monthSummary[m];
                 let statusTag = `<span class="badge badge-none">No Claims</span>`;
-                if (data.count > 0) {
-                    statusTag = data.pending > 0 
-                        ? `<span class="badge badge-pending">${data.count} Claims Logged</span>` 
-                        : `<span class="badge badge-released">Complete</span>`;
-                }
-
+                if (data.count > 0) { statusTag = data.pending > 0 ? `<span class="badge badge-pending">${data.count} Claims Logged</span>` : `<span class="badge badge-released">Complete</span>`; }
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td><strong>${m}</strong></td>
@@ -2530,60 +1806,39 @@
                     <td>₱${data.total.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
                     <td style="color:var(--success);">₱${data.released.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
                     <td style="color:var(--warning);">₱${data.pending.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
-                    <td>${statusTag}</td>
-                `;
+                    <td>${statusTag}</td>`;
                 monthlyTbody.appendChild(tr);
             });
         }
 
-        // 12-MONTH MATRIX VIEW RENDER
         function renderMatrix() {
             const tbody = document.getElementById("matrix-table-body");
             tbody.innerHTML = "";
-
             const search = document.getElementById("matrixSearch") ? document.getElementById("matrixSearch").value.toLowerCase() : "";
-            const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
-
+            const months = ["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
             const filteredEmps = employees.filter(emp => emp.name.toLowerCase().includes(search));
-
             if (filteredEmps.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="17" style="text-align:center; padding:30px; color:#94a3b8;">No records found.</td></tr>`;
                 return;
             }
-
             filteredEmps.forEach((emp, index) => {
                 const tr = document.createElement("tr");
-
-                let intBadge = emp.integration === "INTEGRATED" 
-                    ? `<span class="badge badge-integrated" style="font-size:0.65rem;">INT</span>` 
-                    : `<span class="badge badge-non-integrated" style="font-size:0.65rem;">NON-INT</span>`;
-
-                let rowHtml = `
-                    <td>${index + 1}</td>
-                    <td><strong>${emp.name}</strong></td>
-                    <td><small>${emp.level}</small></td>
-                    <td>${intBadge}</td>
-                    <td><small>${emp.station}</small></td>
-                `;
-
+                let intBadge = emp.integration === "INTEGRATED" ? `<span class="badge badge-integrated" style="font-size:0.65rem;">INT</span>` : `<span class="badge badge-non-integrated" style="font-size:0.65rem;">NON-INT</span>`;
+                let rowHtml = `<td>${index + 1}</td><td><strong>${emp.name}</strong></td><td><small>${emp.level}</small></td><td>${intBadge}</td><td><small>${emp.station}</small></td>`;
                 months.forEach(m => {
                     const monthClaims = emp.claims.filter(c => c.month === m);
                     if (monthClaims.length > 0) {
-                        const cellText = monthClaims.map(c => 
-                            `<span class="badge badge-claim" style="font-size:0.65rem; padding:2px 5px;" title="${c.type} - ₱${c.amount} | Particulars: ${c.particularsRaw || 'N/A'}">${c.type.substring(0, 8)}..</span>`
-                        ).join("<br>");
+                        const cellText = monthClaims.map(c => `<span class="badge badge-claim" style="font-size:0.65rem; padding:2px 5px;" title="${c.type} - ₱${c.amount} | Particulars: ${c.particularsRaw || 'N/A'}">${c.type.substring(0, 8)}..</span>`).join("<br>");
                         rowHtml += `<td>${cellText}</td>`;
                     } else {
                         rowHtml += `<td style="color:#cbd5e1; text-align:center;">-</td>`;
                     }
                 });
-
                 tr.innerHTML = rowHtml;
                 tbody.appendChild(tr);
             });
         }
 
-        // EMPLOYEE CRUD
         function openAddEmpModal() {
             document.getElementById("empModalTitle").innerHTML = `<i class="fa-solid fa-user-plus"></i> Add New Employee`;
             document.getElementById("empForm").reset();
@@ -2594,7 +1849,6 @@
         function openEditEmpModal(empId) {
             const emp = employees.find(e => e.id === empId);
             if (!emp) return;
-
             document.getElementById("empModalTitle").innerHTML = `<i class="fa-solid fa-user-pen"></i> Edit Employee Record`;
             document.getElementById("empEditId").value = emp.id;
             document.getElementById("empName").value = emp.name;
@@ -2605,14 +1859,12 @@
             document.getElementById("empStation").value = emp.station;
             document.getElementById("empIntegration").value = emp.integration;
             document.getElementById("empIntegrationDate").value = emp.integrationDate || "";
-
             openModal("employeeModal");
         }
 
         function saveEmployee(e) {
             e.preventDefault();
             const editId = document.getElementById("empEditId").value;
-
             const empObj = {
                 id: editId ? parseInt(editId) : Date.now(),
                 name: document.getElementById("empName").value.trim().toUpperCase(),
@@ -2625,14 +1877,12 @@
                 integrationDate: document.getElementById("empIntegrationDate").value,
                 claims: editId ? (employees.find(e => e.id === parseInt(editId))?.claims || []) : []
             };
-
             if (editId) {
                 const idx = employees.findIndex(e => e.id === parseInt(editId));
                 if (idx !== -1) employees[idx] = empObj;
             } else {
                 employees.push(empObj);
             }
-
             closeModal("employeeModal");
             renderEmployees();
             renderDashboard();
@@ -2646,7 +1896,6 @@
             }
         }
 
-        // CLAIM CRUD (INCLUDES PARTICULAR RAW & REMARKS)
         function openAddClaimModal(empId) {
             document.getElementById("claimModalTitle").innerHTML = `<i class="fa-solid fa-file-circle-plus"></i> Add Claim Record`;
             document.getElementById("claimForm").reset();
@@ -2658,10 +1907,8 @@
         function openEditClaimModal(empId, claimId) {
             const emp = employees.find(e => e.id === empId);
             if (!emp) return;
-
             const claim = emp.claims.find(c => c.id === claimId);
             if (!claim) return;
-
             document.getElementById("claimModalTitle").innerHTML = `<i class="fa-solid fa-pen-to-square"></i> Edit Claim Record`;
             document.getElementById("claimEmpId").value = empId;
             document.getElementById("claimEditId").value = claimId;
@@ -2672,7 +1919,6 @@
             document.getElementById("claimDateReceived").value = claim.dateReceived || "";
             document.getElementById("claimDateReleased").value = claim.dateReleased || "";
             document.getElementById("claimRemarks").value = claim.remarks || "";
-
             openModal("claimModal");
         }
 
@@ -2680,10 +1926,8 @@
             e.preventDefault();
             const empId = parseInt(document.getElementById("claimEmpId").value);
             const claimEditId = document.getElementById("claimEditId").value;
-
             const emp = employees.find(e => e.id === empId);
             if (!emp) return;
-
             const claimObj = {
                 id: claimEditId ? parseInt(claimEditId) : Date.now(),
                 type: document.getElementById("claimType").value,
@@ -2694,14 +1938,12 @@
                 dateReleased: document.getElementById("claimDateReleased").value,
                 remarks: document.getElementById("claimRemarks").value.trim()
             };
-
             if (claimEditId) {
                 const idx = emp.claims.findIndex(c => c.id === parseInt(claimEditId));
                 if (idx !== -1) emp.claims[idx] = claimObj;
             } else {
                 emp.claims.push(claimObj);
             }
-
             closeModal("claimModal");
             renderIndividualClaimsList(emp);
             renderEmployees();
@@ -2722,49 +1964,32 @@
             }
         }
 
-        // PRINT OFFICIAL INDIVIDUAL CLAIM HISTORY REPORT
         function printEmployeeClaimsCurrent() {
             if (!currentActiveEmpId) return;
             const emp = employees.find(e => e.id === currentActiveEmpId);
             if (!emp) return;
-
             document.getElementById("p-emp-name").innerText = emp.name;
             document.getElementById("p-emp-no").innerText = emp.empNo;
             document.getElementById("p-emp-position").innerText = emp.position;
             document.getElementById("p-emp-station").innerText = `${emp.level} - ${emp.station}`;
             document.getElementById("p-emp-fds").innerText = emp.fds || "N/A";
             document.getElementById("p-emp-integration").innerText = `${emp.integration} ${emp.integrationDate ? `(${emp.integrationDate})` : ''}`;
-
             const tbody = document.getElementById("print-claims-tbody");
             tbody.innerHTML = "";
-
             if (emp.claims.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:15px;">No claim history available for this employee.</td></tr>`;
             } else {
                 emp.claims.forEach((c, i) => {
                     const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td>${i + 1}</td>
-                        <td>${c.type}</td>
-                        <td>${c.particularsRaw || '-'}</td>
-                        <td>${c.month}</td>
-                        <td>₱${parseFloat(c.amount).toLocaleString('en-US', {minimumFractionDigits:2})}</td>
-                        <td>${c.dateReceived || '-'}</td>
-                        <td>${c.dateReleased || '-'}</td>
-                        <td>${c.remarks || '-'}</td>
-                        <td>${c.dateReleased ? 'RELEASED' : 'PENDING'}</td>
-                    `;
+                    tr.innerHTML = `<td>${i + 1}</td><td>${c.type}</td><td>${c.particularsRaw || '-'}</td><td>${c.month}</td><td>₱${parseFloat(c.amount).toLocaleString('en-US', {minimumFractionDigits:2})}</td><td>${c.dateReceived || '-'}</td><td>${c.dateReleased || '-'}</td><td>${c.remarks || '-'}</td><td>${c.dateReleased ? 'RELEASED' : 'PENDING'}</td>`;
                     tbody.appendChild(tr);
                 });
             }
-
             window.print();
         }
 
-        // EXPORT TO CSV WITH PARTICULAR RAW AND REMARKS
         function exportCSV() {
             let csv = "Employee Name,Employee No,FDS Date,Position,Level,Station,Integration,Integration Date,Claim Type,Particulars (Raw),Month,Amount,Date Received,Date Released,Remarks,Status\n";
-
             employees.forEach(emp => {
                 if (emp.claims.length === 0) {
                     csv += `"${emp.name}","${emp.empNo}","${emp.fds || ''}","${emp.position}","${emp.level}","${emp.station}","${emp.integration}","${emp.integrationDate || ''}","N/A","N/A","N/A","0","N/A","N/A","N/A","NO CLAIMS"\n`;
@@ -2777,7 +2002,6 @@
                     });
                 }
             });
-
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement("a");
             const url = URL.createObjectURL(blob);
@@ -2788,7 +2012,6 @@
             document.body.removeChild(link);
         }
 
-        // MODAL HELPERS
         function openModal(id) {
             document.getElementById(id).classList.add("show");
         }
@@ -2800,7 +2023,6 @@
 
     <footer class="official-footer">
         <div class="footer-main">
-
             <div class="footer-col">
                 <h5>Contact Us</h5>
                 <p><i class="fa-solid fa-location-dot"></i> Capitol Drive, Estaka, Dipolog City 7100</p>
@@ -2808,21 +2030,18 @@
                 <p><i class="fa-solid fa-envelope"></i> zn.division@deped.gov.ph</p>
                 <p><i class="fa-solid fa-globe"></i> www.depedzn.net</p>
             </div>
-
             <div class="footer-col">
                 <h5>DepEd Core Values</h5>
                 <p>Maka-Diyos</p>
                 <p>Maka-tao</p>
                 <p>Makakalikasan at Makabansa</p>
             </div>
-
             <div class="footer-col">
                 <h5>System</h5>
                 <p>Payroll &amp; Claim Tracking System</p>
                 <p>Personnel Salary &amp; Claims Processing</p>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>&copy; 2026 Department of Education - Schools Division of Zamboanga del Norte. All Rights Reserved.</p>
             <p>You may not reproduce or transmit any part of this system without prior written permission from the Schools Division Superintendent.</p>
